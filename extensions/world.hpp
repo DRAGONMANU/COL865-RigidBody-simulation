@@ -14,6 +14,14 @@ public:
 
     void update(float dt)
     {
+        for (int i = 0; i < rbs.size(); ++i)
+        {
+            for (int j = i+1; j < rbs.size(); ++j)
+            {
+                rbs[i]->collisionBody(rbs[j],dt);
+            }
+            rbs[i]->collisionGround(dt);
+        }
         for(RigidBody* rb : rbs)
             rb->update(dt);
     }

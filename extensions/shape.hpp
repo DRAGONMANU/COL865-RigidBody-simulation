@@ -6,7 +6,7 @@
 
 class Shape {
 public:
-    enum Type {SPHERE, BOX} type;
+    int type;
     float radius;
     vec3 halfSize;
     std::vector<vec3> collisionSamples;
@@ -24,14 +24,14 @@ Shape::Shape():
 
 Shape Shape::makeSphere(float radius) {
     Shape shape;
-    shape.type = SPHERE;
+    shape.type = 0;
     shape.radius = radius;
     return shape;
 }
 
 Shape Shape::makeBox(vec3 halfSize) {
     Shape shape;
-    shape.type = BOX;
+    shape.type = 1;
     shape.halfSize = halfSize;
     vec3 o = -halfSize;
     vec3 x = vec3(2*halfSize[0],0,0);
@@ -78,7 +78,7 @@ mat3 Shape::moment() {
     // Implement this yourself!
     // Should return the matrix M such that mass*M = I_body
     
-     if (type == SPHERE) {
+     if (type == 0) {
 
         mat3 mom;
         mom << radius*radius*2.0/5, 0, 0, 0, radius*radius*2.0/5, 0, 0, 0, radius*radius*2.0/5 ;
@@ -92,7 +92,7 @@ mat3 Shape::moment() {
 }
 
 void Shape::draw(bool surface) {
-    if (type == SPHERE) {
+    if (type == 0) {
         drawSphere(vec3(0,0,0), radius, surface);
     } else { // type == BOX
         drawBox(-halfSize, halfSize, surface);
@@ -102,7 +102,7 @@ void Shape::draw(bool surface) {
 inline int sgn(float x) {return (x<0) ? -1 : (x>0) ? 1 : 0;}
 
 bool Shape::collisionTest(vec3 p, float &d, vec3 &n) {
-    if (type == SPHERE) {
+    if (type == 0) {
         d = p.norm() - radius;
         n = p.normalized();
         return (d < 0);

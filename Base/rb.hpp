@@ -24,7 +24,7 @@ public:
         position = position + linear_velocity*t;
         // std::cout<<linear_velocity<<"\nlin\n";        
         // std::cout<<angular_velocity<<"\nang\n";       
-        angular_velocity += inverse_inertia_matrix * calcTorque()/mass;
+        angular_velocity += inverse_inertia_matrix * calcTorque();
         quat temp = quat(0,angular_velocity[0],angular_velocity[1],angular_velocity[2]);
         temp = temp * rotation;
         rotation.coeffs() += 1.0/2 * temp.coeffs() * t;

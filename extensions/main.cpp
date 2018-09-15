@@ -66,7 +66,7 @@ void keyPressed(int key) {
 int main(int argc, char **argv) {
     window.create("Animation", 1024, 768);
     window.onKeyPress(keyPressed);
-    camera.lookAt(vec3(1,1.5,5), vec3(0,0.5,0));
+    camera.lookAt(vec3(15,3,15), vec3(0,2.5,0));
     lighting.createDefault();
     text.initialize();
 
@@ -103,11 +103,25 @@ int main(int argc, char **argv) {
 // PART 3
 
     RigidBody rb;
-    rb.setTransform(vec3(0,0,0),quat(1,0,0,0));
-    rb.color = vec3(0.8,0.8,0.8);
-    rb.init(1,1.0,1,0.3,0.25,vec3(0.2,0.4,0.05));
-    rb.applyImpulse(vec3(0,0,-1),vec3(0.2,0,0));
+    rb.setTransform(vec3(-3,0.55,0),quat(1,0,0,0));
+    rb.color = vec3(0,1,1);
+    rb.init(0,1.0,0.2,0.3,0.25);
+    rb.applyImpulse(vec3(100,0,0),vec3(0,0.5,0));
     world.rbs.push_back(new RigidBody(rb));
+
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < i; ++j)
+        {
+            RigidBody rb1;
+            rb1.setTransform(vec3(i*0.5,0.25,-1*i*0.25+j*0.5),quat(1,0,0,0));
+            rb1.color = vec3(0,1,0);
+            rb1.init(0,1.0,0.2,0.3,0.25);
+            // rb1.applyImpulse(vec3(-10,0,0),vec3(0,0.25,0));
+            world.rbs.push_back(new RigidBody(rb1));
+        }
+        
+    }
 
 
     while (!window.shouldClose()) {

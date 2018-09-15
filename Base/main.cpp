@@ -93,9 +93,9 @@ int main(int argc, char **argv) {
     // rb.setTransform(vec3(0,0,0),quat(1,0,0,0));
     // rb.color = vec3(1,0,1);
     // rb.init(1,1.0,0.25,vec3(0.2,0.4,0.05));
-    // rb.angular_velocity = vec3(5.0,0.1,0.1);
+    // // rb.angular_velocity = vec3(5.0,0.1,0.1);
     // // rb.angular_velocity = vec3(0.1,5.0,0.1);
-    // // rb.angular_velocity = vec3(0.1,0.1,5.0);
+    // rb.angular_velocity = vec3(0.1,0.1,5.0);
     // world.rbs.push_back(new RigidBody(rb));
 
     while (!window.shouldClose()) {
